@@ -12,7 +12,7 @@ const Banner = () => {
   return (
     <div className="">
       <Carousel
-        className="text-center "
+        className="text-center  "
         // centerMode={true}
         showArrows={true}
         infiniteLoop={true}

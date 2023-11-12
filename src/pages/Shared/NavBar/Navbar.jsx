@@ -1,23 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const NavItems = (
     <>
       <li>
-        <NavLink>HOME</NavLink>
+        <Link to="/">HOME</Link>
       </li>
       <li>
-        <NavLink>CONTACT US
-        </NavLink>
+        <Link to="*">CONTACT US</Link>
       </li>
       <li>
-        <NavLink>DASHBOARD</NavLink>
+        <Link to="*">DASHBOARD</Link>
       </li>
       <li>
-        <NavLink>OUR MENU</NavLink>
+        <Link to="/menu">OUR MENU</Link>
       </li>
       <li>
-        <NavLink>OUR SHOP</NavLink>
+        <Link to="/order">ORDER FOOD</Link>
       </li>
     </>
   );
@@ -45,20 +44,21 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black bg-opacity-80 rounded-box w-52"
             >
               {NavItems}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">Bistro-boss</a>
+          <a className="btn btn-ghost normal-case text-xl">KHANA PINA</a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-sm gap-2 menu-horizontal px-1">
-           {NavItems}
-          </ul>
-        </div>
+
         <div className="navbar-end">
-          <a className="btn btn-neutral">GET    STARTED</a>
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-sm gap-2 menu-horizontal px-1">
+              {NavItems}
+            </ul>
+          </div>
+          <a className="btn btn-neutral">GET STARTED</a>
         </div>
       </div>
     </>

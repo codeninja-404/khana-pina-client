@@ -20,9 +20,9 @@ const Featured = () => {
         <div>
           <img src={featured} alt="" />
         </div>
-        <div className="md:ml-10 ">
+        <div className="md:ml-10 my-4 ">
           <p>March 20, 2023</p>
-          <p className="uppercase">WHERE CAN I GET SOME?</p>
+          <p className="uppercase mb-4">WHERE CAN I GET SOME?</p>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
             voluptate facere, deserunt dolores maiores quod nobis quas quasi.

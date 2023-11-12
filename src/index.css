@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* .react-parallax {
+  width: 1280px !important;
+  overflow:hidden !important;
+} */
+
+.react-parallax-bgimage {
+    overflow:hidden !important;
+   width: 100% !important; 
+  height: auto !important; 
+  /* display: block !important; */
+
+  /* background-repeat: no-repeat; */
+}
