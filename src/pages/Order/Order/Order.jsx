@@ -4,23 +4,36 @@ import Cover from "../../Shared/Cover/Cover";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../../hooks/useMenu";
-import FoodCard from "../../Shared/FoodCard/FoodCard";
+import OrderTab from "../OrderTab/OrderTab";
+import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
-
+  const categories = ["salad", "pizza", "soup", "dessert", "drink"];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = useMenu();
 
-  const desserts = menu.filter((item) => item.category === "dessert");
-  const soups = menu.filter((item) => item.category === "soup");
-  const pizzas = menu.filter((item) => item.category === "pizza");
-  const salads = menu.filter((item) => item.category === "salad");
-  const offered = menu.filter((item) => item.category === "offered");
+  console.log(category);
+
+  const dessert = menu.filter((item) => item.category === "dessert");
+  const soup = menu.filter((item) => item.category === "soup");
+  const pizza = menu.filter((item) => item.category === "pizza");
+  const salad = menu.filter((item) => item.category === "salad");
+  const drink = menu.filter((item) => item.category === "drinks");
 
   return (
     <div>
+        <Helmet>
+        <title>Khana-Pina | Order Food</title>
+      </Helmet>
       <Cover img={orderCover} title={"Order Food"}></Cover>
-      <Tabs className="my-20" defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+      <Tabs
+        className="mb-20"
+        defaultIndex={tabIndex}
+        onSelect={(index) => setTabIndex(index)}
+      >
         <TabList className="text-center text-xs sm:text-sm md:text-lg my-5">
           <Tab>SALAD</Tab>
           <Tab>PIZZA</Tab>
@@ -29,16 +42,20 @@ const Order = () => {
           <Tab>DRINKS</Tab>
         </TabList>
         <TabPanel>
-          <div className="grid px-2 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-auto gap-4">
-            {salads.map((salad) => (
-              <FoodCard key={salad._id} item={salad}></FoodCard>
-            ))}
-          </div>
+          <OrderTab items={salad}></OrderTab>
         </TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+          <OrderTab items={pizza}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={soup}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={dessert}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={drink}></OrderTab>
+        </TabPanel>
       </Tabs>
     </div>
   );
