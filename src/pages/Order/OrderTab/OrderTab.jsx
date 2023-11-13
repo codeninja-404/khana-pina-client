@@ -6,19 +6,23 @@ import { Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const OrderTab = ({ items }) => {
   const subarraySize = 3;
 
-  const createSubarrays = (array, size) => {
-    const subarrays = [];
-    for (let i = 0; i < array.length; i += size) {
-      subarrays.push(array.slice(i, i + size));
-    }
-    return subarrays;
-  };
-  const [result] = useState(createSubarrays(items, subarraySize));
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    const createSubarrays = (array, size) => {
+      const subarrays = [];
+      for (let i = 0; i < array.length; i += size) {
+        subarrays.push(array.slice(i, i + size));
+      }
+      return subarrays;
+    };
+    setResult(createSubarrays(items, subarraySize));
+  }, [items]);
 
   const pagination = {
     clickable: true,
