@@ -1,13 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 const Login = () => {
   const captchaRef = useRef();
   const [disabled, setDisabled] = useState(true);
+
+  const { signIn } = useContext(AuthContext);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -17,6 +21,14 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+    signIn(email, password)
+      .then((userCredential) => {
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        alert(error.code);
+        alert(error.message);
+      });
   };
 
   const handleValidateCaptcha = () => {
@@ -39,7 +51,7 @@ const Login = () => {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleLogin} className="card-body">
+          <form onSubmit={handleLogin} className="p-4">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -71,7 +83,7 @@ const Login = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <LoadCanvasTemplate  />
+                <LoadCanvasTemplate />
               </label>
               <input
                 ref={captchaRef}
@@ -88,7 +100,7 @@ const Login = () => {
                 Validate
               </button>
             </div>
-            <div className="form-control ">
+            <div className="form-control mt-2 ">
               <input
                 disabled={disabled}
                 className="btn btn-primary"
@@ -97,6 +109,10 @@ const Login = () => {
               />
             </div>
           </form>
+          <div className="mx-auto py-2">
+          <p><small>New Here ? <Link to='/signup' className="btn text-green-500 hover:bg-green-500  btn-outline btn-xs">Create Account
+          </Link></small></p>
+          </div>
         </div>
       </div>
     </div>
