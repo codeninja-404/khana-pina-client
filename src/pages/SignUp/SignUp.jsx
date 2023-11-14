@@ -5,18 +5,24 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     createUser(data.email, data.password)
       .then((userCredential) => {
-        console.log(userCredential.user);
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            alert("success update profile");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((error) => {
         alert(error.code);
@@ -55,6 +61,23 @@ const SignUp = () => {
                 {errors.name && (
                   <span className=" text-red-500 pt-2 ">
                     Name field is required
+                  </span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoURL", { required: true })}
+                  name="photoURL"
+                  placeholder="Photo URL"
+                  className="input input-bordered"
+                />
+                {errors.photoURL && (
+                  <span className=" text-red-500 pt-2 ">
+                    Photo URL field is required
                   </span>
                 )}
               </div>

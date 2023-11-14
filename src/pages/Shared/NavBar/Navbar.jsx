@@ -21,6 +21,9 @@ const Navbar = () => {
       <li>
         <Link to="/order/salad">ORDER FOOD</Link>
       </li>
+      <li>
+        <Link to="/secret">secret</Link>
+      </li>
 
       {user ? (
         <>

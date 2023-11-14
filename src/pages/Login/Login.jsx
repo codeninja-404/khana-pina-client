@@ -5,7 +5,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 
@@ -14,6 +14,11 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
 
   const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   useEffect(() => {
     loadCaptchaEnginge(2);
   }, []);
@@ -35,6 +40,7 @@ const Login = () => {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
+      navigate(from, { replace: true });
     });
   };
 
@@ -97,20 +103,20 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <div className="group input-group">
-                <input
-                  ref={captchaRef}
-                  type="text"
-                  name="captcha"
-                  placeholder="type the text above"
-                  className="input input-bordered flex-1"
-                  required
-                />
-                <input
-                  onClick={handleValidateCaptcha}
-                  className="btn text-xl p-1 btn-outline  "
-                  value="✔️"
-                  type="button"
-                />
+                  <input
+                    ref={captchaRef}
+                    type="text"
+                    name="captcha"
+                    placeholder="type the text above"
+                    className="input input-bordered flex-1"
+                    required
+                  />
+                  <input
+                    onClick={handleValidateCaptcha}
+                    className="btn text-xl p-1 btn-outline  "
+                    value="✔️"
+                    type="button"
+                  />
                 </div>
               </div>
               <div className="form-control mt-2 ">
