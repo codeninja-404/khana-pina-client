@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { RiShoppingCartFill } from "react-icons/ri";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -12,26 +13,32 @@ const Navbar = () => {
   };
   const NavItems = (
     <>
-      <li>
-        <Link to="/">HOME</Link>
+      <li className=" hover:text-[#ffa500] ">
+        <NavLink to="/">HOME</NavLink>
       </li>
-      <li>
-        <Link to="/menu">OUR MENU</Link>
+      <li className=" hover:text-[#ffa500] ">
+        <NavLink to="/menu">OUR MENU</NavLink>
       </li>
-      <li>
-        <Link to="/order/salad">ORDER FOOD</Link>
+      <li className=" hover:text-[#ffa500] ">
+        <NavLink to="/order/salad">ORDER FOOD</NavLink>
       </li>
-      <li>
-        <Link to="/secret">secret</Link>
+      <li className=" hover:text-[#ffa500] ">
+        <NavLink to="/secret">SECRET</NavLink>
+      </li>
+      <li className="  ">
+        <Link to="/">
+          <button className="btn btn-sm text-xl ">
+          <RiShoppingCartFill />
+            <div className="badge badge-secondary">+0</div>
+          </button>
+        </Link>
       </li>
 
       {user ? (
         <>
-          <li>
-            <button onClick={handleLogOut} className="btn btn-ghost btn-sm">
-              LOG OUT
-            </button>
-          </li>
+          <button onClick={handleLogOut} className="btn btn-ghost btn-sm">
+            LOG OUT
+          </button>
         </>
       ) : (
         <>
@@ -66,7 +73,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black bg-opacity-80 rounded-box w-52"
+              className="space-y-2  nav_link menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black bg-opacity-80 rounded-box w-52"
             >
               {NavItems}
             </ul>
@@ -75,8 +82,8 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-sm gap-2 menu-horizontal px-1">
+          <div className="navbar-center  hidden lg:flex">
+            <ul className="items-center justify-between nav_link menu-sm gap-2 menu-horizontal px-1">
               {NavItems}
             </ul>
           </div>

@@ -1,17 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* .react-parallax {
-  width: 1280px !important;
-  overflow:hidden !important;
-} */
+
 
 .react-parallax-bgimage {
-    overflow:hidden !important;
-   width: 100% !important; 
-  height: auto !important; 
-  /* display: block !important; */
-
-  /* background-repeat: no-repeat; */
+  overflow: hidden !important;
+  width: 100% !important;
+  height: auto !important;
+  
 }
 
+.nav_link .active {
+  color: orange !important;
+  background: none !important;
+  font-weight: bold !important;
+  border-bottom: 3px solid orange !important;
+  text-shadow: 2px 3px 3px #000;
+}
