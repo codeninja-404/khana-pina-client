@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .react-parallax-bgimage {
   overflow: hidden !important;
   width: 100% !important;
   height: auto !important;
-  
 }
 
 .nav_link .active {
@@ -16,4 +14,12 @@
   font-weight: bold !important;
   border-bottom: 3px solid orange !important;
   text-shadow: 2px 3px 3px #000;
+}
+
+.dashboard-nav .active{
+  color: white!important;
+  background: none !important;
+  border-bottom: 4px solid white !important;
+  border-radius:0px;
+  font-size:1.3rem
 }
