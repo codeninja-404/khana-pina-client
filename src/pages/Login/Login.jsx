@@ -8,6 +8,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import Google from "../../components/Socialogin/Google";
 
 const Login = () => {
   const captchaRef = useRef();
@@ -128,6 +129,9 @@ const Login = () => {
                 />
               </div>
             </form>
+
+            {/* google log in */}
+            <Google></Google>
             <div className="mx-auto py-2">
               <p>
                 <small>

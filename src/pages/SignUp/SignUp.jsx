@@ -1,11 +1,16 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Google from "../../components/Socialogin/Google";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,15 +23,39 @@ const SignUp = () => {
       .then((userCredential) => {
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            alert("success update profile");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate('/');
+              }
+            });
           })
           .catch((err) => {
-            console.log(err);
+            Swal.fire({
+              icon: "error",
+              title: `${err.message}`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
       })
       .catch((error) => {
-        alert(error.code);
-        alert(error.message);
+        Swal.fire({
+          icon: "error",
+          title: `${error.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
 
@@ -141,6 +170,7 @@ const SignUp = () => {
                 />
               </div>
             </form>
+            <Google></Google>
             <div className="mx-auto py-2">
               <p>
                 <small>

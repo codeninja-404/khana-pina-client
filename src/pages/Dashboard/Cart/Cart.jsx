@@ -71,14 +71,14 @@ const Cart = () => {
                     <p className="font-bold">{item.name}</p>
                   </td>
                   <td>$ {item.price}</td>
-                  <th>
+                  <td>
                     <button
                       onClick={() => handleDelete(item._id)}
                       className="btn bg-gray-500  hover:bg-red-500  text-lg text-white btn-xs"
                     >
                       <BsFillTrashFill />
                     </button>
-                  </th>
+                  </td>
                 </tr>
               </>
             ))}
