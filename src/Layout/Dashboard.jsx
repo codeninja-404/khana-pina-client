@@ -4,7 +4,6 @@ import {
   FaAddressBook,
   FaCalendar,
   FaEnvelope,
-  FaFolderOpen,
   FaHome,
   FaList,
   FaStar,
@@ -13,9 +12,11 @@ import {
 import { BiDish } from "react-icons/bi";
 import { BiFoodMenu } from "react-icons/bi";
 import { PiForkKnifeBold } from "react-icons/pi";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   return (
     <div className="flex">
       {/* dashboard sidebar */}
@@ -30,9 +31,10 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink to="/dashboard/addItems">
-                <PiForkKnifeBold />Add Items
+                  <PiForkKnifeBold />
+                  Add Items
                 </NavLink>
-              </li>        
+              </li>
               <li>
                 <NavLink to="/dashboard/manageItems">
                   <FaList /> Manage Items
