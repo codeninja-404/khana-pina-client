@@ -8,7 +8,7 @@ const AdminRoute = ({ children }) => {
 
   const location = useLocation();
 
-  if (loading) {
+  if (loading ||isAdminLoading) {
     return (
       <>
         <div className="h-screen flex justify-center items-center">

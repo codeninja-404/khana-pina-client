@@ -49,7 +49,7 @@ const FoodCard = ({ item }) => {
         }
       });
     }
-    console.log(food, user.email);
+   
   };
   return (
     <div>

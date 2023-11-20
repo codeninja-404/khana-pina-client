@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000/api/v1",
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 const useAxiosSecure = () => {
@@ -14,7 +14,7 @@ const useAxiosSecure = () => {
     function (config) {
       const token = localStorage.getItem("access-token");
       config.headers.authorization = `Bearer ${token}`;
-      console.log("req stopped by interceptors", token);
+      
       return config;
     },
     function (error) {
@@ -27,7 +27,7 @@ const useAxiosSecure = () => {
     },
     async (error) => {
       const status = error.response.status;
-      console.log("status error", status);
+      
       // for 401 or 03 log out the user and  take the user to the log in page
       if (status === 401 || status === 403) {
         await logOut();

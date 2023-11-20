@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { RiShoppingCartFill } from "react-icons/ri";
 import useCart from "../../../hooks/useCart";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {})
-      .catch((error) => console.log(error));
+      .catch((error) => Swal.fire(error));
   };
   const NavItems = (
     <>
