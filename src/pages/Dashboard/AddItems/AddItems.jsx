@@ -12,7 +12,6 @@ const AddItems = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
-  
     // image upload and then get an url
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -31,12 +30,11 @@ const AddItems = () => {
       };
       //   only admin can add item so it will be secure post
       const menuRes = await axiosSecure.post("/menu", menuItem);
-      
+
       if (menuRes.data.insertedId) {
         Swal.fire("Your Item added.", "", "success");
       }
     }
-    
   };
 
   return (
@@ -87,6 +85,7 @@ const AddItems = () => {
                 {...register("price")}
                 required
                 type="number"
+                step="0.000001"
                 placeholder="Price"
                 className="input input-bordered w-full "
               />
