@@ -4,9 +4,10 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useMenu from "../../../hooks/useMenu";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
-  const [menu, loading, refetch] = useMenu();
+  const [menu /*loading*/, , refetch] = useMenu();
   const axiosSecure = useAxiosSecure();
   const handleDelete = (item) => {
     console.log(item);
@@ -69,9 +70,11 @@ const ManageItems = () => {
                   <td>{item.name}</td>
                   <td>$ {item.price}</td>
                   <th>
-                    <button className="btn bg-green-500  hover:bg-green-600  text-lg text-white btn-sm">
-                      <GrDocumentUpdate />
-                    </button>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="btn bg-green-500  hover:bg-green-600  text-lg text-white btn-sm">
+                        <GrDocumentUpdate />
+                      </button>
+                    </Link>
                   </th>
                   <th>
                     <button
